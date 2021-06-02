@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "127795958006",
+    "project_id": "wachapp-cf241",
+    "storage_bucket": "wachapp-cf241.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127795958006:android:7f7e70e0d6b50151e41cd7",
+        "android_client_info": {
+          "package_name": "com.example.wachapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127795958006-d1un0nk0aniuvjnpljppk73u0o9vsvi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAeVKwnkG17r4CzgMchcFSi17ZFHLtMSJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127795958006-d1un0nk0aniuvjnpljppk73u0o9vsvi0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
