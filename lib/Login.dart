@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wachapp/ForgotPassword.dart';
@@ -7,11 +6,6 @@ import 'package:wachapp/registerPage.dart';
 import 'package:wachapp/services/auth.dart';
 import 'package:wachapp/services/database.dart';
 import 'home.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -74,10 +68,9 @@ class _LoginPageState extends State<LoginPage> {
       body: isLoading ? Container(
               child: Center(child: CircularProgressIndicator()),
             ) : Container(
-              padding: EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(horizontal: 18),
               child: Column(
                 children: [
-                  Spacer(),
                   Form(
                     key: formKey,
                     child: Column(
@@ -88,20 +81,20 @@ class _LoginPageState extends State<LoginPage> {
                                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                     .hasMatch(val)
                                 ? null
-                                : "Please Enter Correct Email";//REVISION
+                                : "Por favor introduce un email correcto";//REVISION
                           },
                           controller: emailEditingController,
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.black, fontSize: 16),
                           decoration: InputDecoration(
                       hintText: ("Email"),
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Colors.black),
                       focusedBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         ),
                       enabledBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         )
                     ),
                         ),
@@ -110,18 +103,18 @@ class _LoginPageState extends State<LoginPage> {
                           validator: (val) {
                             return val.length > 3 ? null : "Introduce una contraseña de más de 3 caracteres";
                           },
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.black, fontSize: 16),
                           controller: passwordEditingController,
                           decoration: InputDecoration(
                           hintText: ("Contraseña"),
-                          hintStyle: TextStyle(color: Colors.white54),
+                          hintStyle: TextStyle(color: Colors.black),
                           focusedBorder:
                             UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)
+                              borderSide: BorderSide(color: Colors.black)
                             ),
                           enabledBorder:
                             UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)
+                              borderSide: BorderSide(color: Colors.black)
                             )
                         ),
                         ),
@@ -144,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                                 horizontal: 16, vertical: 8),
                             child: Text(
                               "¿Ha olvidado su contraseña?",
-                              style: TextStyle(color: Colors.white, fontSize: 16),
+                              style: TextStyle(color: Colors.black, fontSize: 16),
                             )),
                       )
                     ],
@@ -190,17 +183,19 @@ class _LoginPageState extends State<LoginPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "¿No tiene una cuenta?",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        "¿No tiene una cuenta? ",
+                        style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                       GestureDetector(
                         onTap: () {
-                          widget.toggleView();
+                          //widget.toggleView();
+                          Navigator.pushReplacement(
+                            context, MaterialPageRoute(builder: (context) => RegisterPage(null)));
                         },
                         child: Text(
-                          "Registrate ahora",
+                          " Registrate ahora",
                           style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                               fontSize: 16,
                               decoration: TextDecoration.underline),
                         ),
@@ -214,114 +209,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-/*  bool _isLoading = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.purple[400], Colors.teal],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter),
-        ),
-        child: _isLoading ? Center(
-          child: CircularProgressIndicator()) : ListView(
-          children: <Widget>[
-            headerSection(),
-            textSection(),
-            buttonSection(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container buttonSection() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 100.0,
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
-      margin: EdgeInsets.only(top: 15.0),
-      child: Column(
-        children: [
-          RaisedButton(
-            onPressed: emailController.text == "" || passwordController.text == "" ? null : () {
-            
-              Navigator.pushNamed(context, Home.route); 
-            
-              /*setState(() {
-                Navigator.pushNamed(context, Home.route);
-                //_isLoading = true;
-              });
-              login(emailController.text, passwordController.text);*/
-            },
-            elevation: 0.0,
-            color: Colors.purple,
-            child: Text("Iniciar Sesión", style: TextStyle(color: Colors.white70)),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          ),
-          RaisedButton(
-            onPressed: () => Navigator.pushNamed(context, RegisterPage.route),
-            elevation: 0.0,
-            color: Colors.purple,
-            child: Text("Registrarse", style: TextStyle(color: Colors.white70)),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
-
-  Container textSection() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            controller: emailController,
-            cursorColor: Colors.white,
-
-            style: TextStyle(color: Colors.white70),
-            decoration: InputDecoration(
-              icon: Icon(Icons.email, color: Colors.white70),
-              hintText: "Email",
-              border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-              hintStyle: TextStyle(color: Colors.white70),
-            ),
-          ),
-          SizedBox(height: 30.0),
-          TextFormField(
-            controller: passwordController,
-            cursorColor: Colors.white,
-            obscureText: true,
-            style: TextStyle(color: Colors.white70),
-            decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.white70),
-              hintText: "Password",
-              border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-              hintStyle: TextStyle(color: Colors.white70),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container headerSection() {
-    return Container(
-      margin: EdgeInsets.only(top: 50.0),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Text("Inicio de Sesión",
-          style: TextStyle(
-              color: Colors.white70,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold)),
-    );
-  }
-}*/

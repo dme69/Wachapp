@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">127795958006-d1un0nk0aniuvjnpljppk73u0o9vsvi0.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">127795958006</string>
+    <string name="google_api_key" translatable="false">AIzaSyAeVKwnkG17r4CzgMchcFSi17ZFHLtMSJs</string>
+    <string name="google_app_id" translatable="false">1:127795958006:android:7f7e70e0d6b50151e41cd7</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAeVKwnkG17r4CzgMchcFSi17ZFHLtMSJs</string>
+    <string name="google_storage_bucket" translatable="false">wachapp-cf241.appspot.com</string>
+    <string name="project_id" translatable="false">wachapp-cf241</string>
+</resources>

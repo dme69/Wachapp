@@ -79,14 +79,14 @@ class _SearchState extends State<Search> {
               Text(
                 userName,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),
               ),
               Text(
                 userEmail,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),
               )
@@ -105,7 +105,7 @@ class _SearchState extends State<Search> {
               ),
               child: Text("Message",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16
                 ),),
             ),
@@ -151,11 +151,11 @@ class _SearchState extends State<Search> {
                   Expanded(
                     child: TextField(
                       controller: searchEditingController,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.black, fontSize: 16),
                       decoration: InputDecoration(
                         hintText: "buscando usuario ...",
                         hintStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 16,
                         ),
                         border: InputBorder.none
@@ -181,7 +181,7 @@ class _SearchState extends State<Search> {
                           borderRadius: BorderRadius.circular(40)
                         ),
                         padding: EdgeInsets.all(12),
-                        child: Image.asset("assets/images/search_white.png",
+                        child: Image.asset("assets/images/search.jpeg",
                           height: 25, width: 25,)),
                   )
                 ],

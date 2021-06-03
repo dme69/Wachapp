@@ -1,16 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:wachapp/Chat.dart';
 import 'package:wachapp/HelperFunctions.dart';
 import 'package:wachapp/Login.dart';
 import 'package:wachapp/services/auth.dart';
 import 'package:wachapp/services/database.dart';
 import 'home.dart';
-import 'package:stream_chat_flutter/stream_chat_flutter.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:scoped_model/scoped_model.dart';
 
 class RegisterPage extends StatefulWidget {
   static final String route = "/registerPage";
@@ -73,63 +66,62 @@ class _RegisterState extends State<RegisterPage> {
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           children: [
-            Spacer(),
             Form(
               key: formKey,
               child: Column(
                 children: [
                   TextFormField(
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                     controller: usernameEditingController,
                     validator: (val){
                       return val.isEmpty || val.length < 3 ? "El usuario debe de tener mas de 3 caracteres" : null;
                     },
                     decoration: InputDecoration(
                       hintText: ("Nombre de usuario"),
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Colors.black),
                       focusedBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         ),
                       enabledBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         )
                     ),
                   ),
                   TextFormField(
                     controller: emailEditingController,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                     validator: (val){
                       return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(val) ?
-                          null : "Enter correct email";//REVISION
+                          null : "Introduce un email correcto";
                     },
                     decoration: InputDecoration(
                       hintText: ("Email"),
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Colors.black),
                       focusedBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         ),
                       enabledBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         )
                     ),
                   ),
                   TextFormField(
                     obscureText: true,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.black, fontSize: 16),
                     decoration: InputDecoration(
                       hintText: ("Contraseña"),
-                      hintStyle: TextStyle(color: Colors.white54),
+                      hintStyle: TextStyle(color: Colors.black),
                       focusedBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         ),
                       enabledBorder:
                         UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
+                          borderSide: BorderSide(color: Colors.black)
                         )
                     ),
                     controller: passwordEditingController,
@@ -179,17 +171,19 @@ class _RegisterState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "¿No tienes cuenta?",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  "¿Ya tienes cuenta? ",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
                 ),
                 GestureDetector(
                   onTap: () {
-                    widget.toggleView();
+                    //widget.toggleView();
+                    Navigator.pushReplacement(
+                            context, MaterialPageRoute(builder: (context) => LoginPage(null)));
                   },
                   child: Text(
-                    "SignIn now",
+                    " Logueate",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 16,
                         decoration: TextDecoration.underline),
                   ),
@@ -205,126 +199,3 @@ class _RegisterState extends State<RegisterPage> {
     );
   }
 }
-
-
-
-
-
-
-
-
-  /*final formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.purple[400], Colors.teal],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter),
-        ),
-        child: _isLoading ? Center(
-          child: CircularProgressIndicator()) : ListView(
-          children: <Widget>[
-            headerSection(),
-            textSection(),
-            buttonSection(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container buttonSection() {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 100.0,
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
-      margin: EdgeInsets.only(top: 15.0),
-      child: Column(
-        children: [
-          RaisedButton(
-            onPressed: emailController.text == "" || passwordController.text == "" ? null : () {
-              Auth.signInWithEmailAndPassword(String emailController.text, String password);
-            },
-            elevation: 0.0,
-            color: Colors.purple,
-            child: Text("Registrarse", style: TextStyle(color: Colors.white70)),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          ),
-          RaisedButton(
-            onPressed: () => Navigator.pushNamed(context, LoginPage.route),
-            elevation: 0.0,
-            color: Colors.purple,
-            child: Text("Cancelar", style: TextStyle(color: Colors.white70)),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ],
-      ),
-    );
-  }
-
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
-
-  Container textSection() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            controller: emailController,
-            cursorColor: Colors.white,
-            style: TextStyle(color: Colors.white70),
-            decoration: InputDecoration(
-              icon: Icon(Icons.email, color: Colors.white70),
-              hintText: "Email",
-              border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-              hintStyle: TextStyle(color: Colors.white70),
-            ),
-          ),
-          SizedBox(height: 30.0),
-          TextFormField(
-            controller: passwordController,
-            cursorColor: Colors.white,
-            obscureText: true,
-            style: TextStyle(color: Colors.white70),
-            decoration: InputDecoration(
-              icon: Icon(Icons.lock, color: Colors.white70),
-              hintText: "Password",
-              border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-              hintStyle: TextStyle(color: Colors.white70),
-            ),
-          ),
-          SizedBox(height: 30.0),
-          TextFormField(
-            cursorColor: Colors.white,
-            obscureText: true,
-            style: TextStyle(color: Colors.white70),
-            decoration: InputDecoration(
-              icon: Icon(Icons.person, color: Colors.white70),
-              hintText: "Nombre",
-              border: UnderlineInputBorder(borderSide: BorderSide(color: Colors.white70)),
-              hintStyle: TextStyle(color: Colors.white70),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container headerSection() {
-    return Container(
-      margin: EdgeInsets.only(top: 50.0),
-      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Text("Registro de Usuario",
-          style: TextStyle(
-              color: Colors.white70,
-              fontSize: 40.0,
-              fontWeight: FontWeight.bold)),
-    );
-  }
-}*/
