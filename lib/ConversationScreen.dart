@@ -38,9 +38,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       Map<String, dynamic> chatMessageMap = {
         "sendBy": myName,
         "message": messageEditingController.text,
-        'time': DateTime
-            .now()
-            .millisecondsSinceEpoch,
+        'time': DateTime.now().millisecondsSinceEpoch,
       };
 
       Database().addMessage(widget.chatRoomId, chatMessageMap);
@@ -72,10 +70,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
           children: [
             chatMessages(),
             Container(alignment: Alignment.bottomCenter,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: MediaQuery.of(context).size.width,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                 color: Color(0x54FFFFFF),
@@ -84,11 +79,11 @@ class _ConversationScreenState extends State<ConversationScreen> {
                     Expanded(
                         child: TextField(
                           controller: messageEditingController,
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          style: TextStyle(color: Colors.black, fontSize: 16),
                           decoration: InputDecoration(
                               hintText: "Mensaje ...",
                               hintStyle: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 16,
                               ),
                               border: InputBorder.none
@@ -100,8 +95,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                         addMessage();
                       },
                       child: Container(
-                          height: 40,
-                          width: 40,
+                          height: 70,
+                          width: 70,
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
                                   colors: [
@@ -114,8 +109,8 @@ class _ConversationScreenState extends State<ConversationScreen> {
                               borderRadius: BorderRadius.circular(40)
                           ),
                           padding: EdgeInsets.all(12),
-                          child: Image.asset("assets/images/send.png",
-                            height: 25, width: 25,)),
+                          child: Image.asset("assets/images/send.jpg",
+                            height: 65, width: 65,)),
                     ),
                   ],
                 ),
@@ -126,7 +121,6 @@ class _ConversationScreenState extends State<ConversationScreen> {
       ),
     );
   }
-
 }
 
 class MessageTile extends StatelessWidget {
@@ -134,7 +128,6 @@ class MessageTile extends StatelessWidget {
   final bool sendByMe;
 
   MessageTile({@required this.message, @required this.sendByMe});
-
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +149,7 @@ class MessageTile extends StatelessWidget {
                 topLeft: Radius.circular(23),
                 topRight: Radius.circular(23),
                 bottomLeft: Radius.circular(23)
-            ) :
-            BorderRadius.only(
+            ) : BorderRadius.only(
         topLeft: Radius.circular(23),
           topRight: Radius.circular(23),
           bottomRight: Radius.circular(23)),
@@ -165,20 +157,20 @@ class MessageTile extends StatelessWidget {
               colors: sendByMe ? [
                 const Color(0xff007EF4),
                 const Color(0xff2A75BC)
-              ]
-                  : [
+              ] : [
                 const Color(0x1AFFFFFF),
                 const Color(0x1AFFFFFF)
               ],
             )
         ),
-        child: Text(message,
-            textAlign: TextAlign.start,
-            style: TextStyle(
-            color: Colors.white,
+        child: Text(
+          message,
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            color: Colors.black,
             fontSize: 16,
-            fontFamily: 'OverpassRegular',
-            fontWeight: FontWeight.w300)),
+            fontWeight: FontWeight.w300)
+          ),
       ),
     );
   }

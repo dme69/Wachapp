@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wachapp/ConversationScreen.dart';
 import 'package:wachapp/HelperFunctions.dart';
-import 'package:wachapp/registerPage.dart';
-import 'package:wachapp/services/auth.dart';
 import 'package:wachapp/services/database.dart';
 
 class Chat extends StatefulWidget {
@@ -64,7 +62,7 @@ class ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Wachapp'),
+      /*appBar: AppBar(title: Text('Wachapp'),
       actions: [
           GestureDetector(
             onTap: () {
@@ -77,7 +75,7 @@ class ChatState extends State<Chat> {
                 child: Icon(Icons.exit_to_app)),
           )
         ],
-      ),
+      ),*/
       body: Container(
         child: chatRoomsList(),
       ),
@@ -125,7 +123,6 @@ class ChatRoomsTile extends StatelessWidget {
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
-                      fontFamily: 'OverpassRegular',
                       fontWeight: FontWeight.w300)),
             ),
             SizedBox(
@@ -136,7 +133,6 @@ class ChatRoomsTile extends StatelessWidget {
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 16,
-                    fontFamily: 'OverpassRegular',
                     fontWeight: FontWeight.w300))
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database {
-//VEBdu20jB5dr2iuk14Il
   Future<void> addUserInfo(userData) async {
     Firestore.instance.collection("users").add(userData).catchError((e) {
       print(e.toString());
@@ -46,7 +45,6 @@ class Database {
 
 
   Future<void> addMessage(String chatRoomId, chatMessageData){
-
     Firestore.instance.collection("chatRoom")
         .document(chatRoomId)
         .collection("chats")

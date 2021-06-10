@@ -14,6 +14,7 @@ class _SearchState extends State<Search> {
   TextEditingController searchEditingController = new TextEditingController();
   QuerySnapshot searchResultSnapshot;
   static String myName = "";
+  String chatRoomId;
 
   bool isLoading = false;
   bool haveUserSearched = false;
@@ -40,14 +41,14 @@ class _SearchState extends State<Search> {
       shrinkWrap: true,
       itemCount: searchResultSnapshot.documents.length,
         itemBuilder: (context, index){
-        return userTile(
-          searchResultSnapshot.documents[index].data["userName"],
-          searchResultSnapshot.documents[index].data["userEmail"],
-        );
+          return userTile(
+            searchResultSnapshot.documents[index].data["userName"],
+            searchResultSnapshot.documents[index].data["userEmail"],
+          );
         }) : Container();
   }
 
-  /// 1.create a chatroom, send user to the chatroom, other userdetails
+  // 1.crear una conversacion, enviar al usuario a la pantalla de conversacion
   sendMessage(String userName){
     List<String> users = [myName,userName];
 
@@ -60,11 +61,11 @@ class _SearchState extends State<Search> {
 
     databaseMethods.addChatRoom(chatRoom, chatRoomId);
 
-    Navigator.push(context, MaterialPageRoute(
+    /*Navigator.push(context, MaterialPageRoute(
       builder: (context) => ConversationScreen(
         chatRoomId: chatRoomId,
       )
-    ));
+    ));*/
 
   }
 
@@ -95,7 +96,12 @@ class _SearchState extends State<Search> {
           Spacer(),
           GestureDetector(
             onTap: (){
-              sendMessage(userName);
+              //sendMessage(userName);
+              Navigator.push(context, MaterialPageRoute(
+      builder: (context) => ConversationScreen(
+        chatRoomId: chatRoomId,
+      )
+    ));
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
@@ -103,7 +109,7 @@ class _SearchState extends State<Search> {
                   color: Colors.blue,
                   borderRadius: BorderRadius.circular(24)
               ),
-              child: Text("Message",
+              child: Text("Mensaje",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 16
@@ -167,8 +173,8 @@ class _SearchState extends State<Search> {
                       initiateSearch();
                     },
                     child: Container(
-                      height: 40,
-                        width: 40,
+                      height: 60,
+                        width: 60,
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: [

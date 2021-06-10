@@ -35,13 +35,10 @@ class _LoginPageState extends State<LoginPage> {
         isLoading = true;
       });
 
-      await authService
-          .signInWithEmailAndPassword(
-              emailEditingController.text, passwordEditingController.text)
-          .then((result) async {
-        if (result != null)  {
-          QuerySnapshot userInfoSnapshot =
-              await Database().getUserInfo(emailEditingController.text);
+      await authService.signInWithEmailAndPassword(
+        emailEditingController.text, passwordEditingController.text).then((result) async {
+          if (result != null)  {
+            QuerySnapshot userInfoSnapshot = await Database().getUserInfo(emailEditingController.text);
 
           HelperFunctions.saveUserLoggedInSharedPreference(true);
           HelperFunctions.saveUserNameSharedPreference(userInfoSnapshot.documents[0].data["userName"]);
@@ -80,23 +77,22 @@ class _LoginPageState extends State<LoginPage> {
                             return RegExp(
                                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                     .hasMatch(val)
-                                ? null
-                                : "Por favor introduce un email correcto";//REVISION
+                                ? null : "Por favor introduce un email correcto";
                           },
                           controller: emailEditingController,
                           style: TextStyle(color: Colors.black, fontSize: 16),
                           decoration: InputDecoration(
-                      hintText: ("Email"),
-                      hintStyle: TextStyle(color: Colors.black),
-                      focusedBorder:
-                        UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)
-                        ),
-                      enabledBorder:
-                        UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black)
-                        )
-                    ),
+                            hintText: ("Email"),
+                            hintStyle: TextStyle(color: Colors.black),
+                            focusedBorder:
+                            UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)
+                            ),
+                            enabledBorder:
+                            UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.black)
+                            )
+                          ),
                         ),
                         TextFormField(
                           obscureText: true,
@@ -130,11 +126,11 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ForgotPassword()));
+                                builder: (context) => ForgotPassword()));
                         },
                         child: Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+                              horizontal: 16, vertical: 8),
                             child: Text(
                               "¿Ha olvidado su contraseña?",
                               style: TextStyle(color: Colors.black, fontSize: 16),
@@ -150,13 +146,13 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 16),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          gradient: LinearGradient(
-                            colors: [
-                              const Color(0xff007EF4),
-                              const Color(0xff2A75BC)
-                            ],
-                          )),
+                        borderRadius: BorderRadius.circular(30),
+                        gradient: LinearGradient(
+                          colors: [
+                            const Color(0xff007EF4),
+                            const Color(0xff2A75BC)
+                          ],
+                        )),
                       width: MediaQuery.of(context).size.width,
                       child: Text(
                         "Login",
@@ -166,18 +162,18 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   SizedBox(height: 16,),
-                  Container(
+                  /*Container(
                     padding: EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.white),
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white),
                     width: MediaQuery.of(context).size.width,
                     child: Text(
                       "Login con Google",
                       style: TextStyle(fontSize: 17, color: Color(0xff071930)),
                       textAlign: TextAlign.center,
                     ),
-                  ),
+                  ),*/
                   SizedBox(height: 16,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

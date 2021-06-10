@@ -7,7 +7,6 @@ import 'home.dart';
 
 class RegisterPage extends StatefulWidget {
   static final String route = "/registerPage";
-  // Register({Key key}) : super(key: key);
   final Function toggleView;
   RegisterPage(this.toggleView);
 
@@ -153,7 +152,7 @@ class _RegisterState extends State<RegisterPage> {
               ),
             ),
             SizedBox(height: 16,),
-            Container(
+            /*Container(
               padding: EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30), color: Colors.white),
@@ -163,10 +162,8 @@ class _RegisterState extends State<RegisterPage> {
                 style: TextStyle(fontSize: 17, color: Color(0xff071930)),
                 textAlign: TextAlign.center,
               ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
+            ),*/
+            SizedBox(height: 16,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -190,9 +187,7 @@ class _RegisterState extends State<RegisterPage> {
                 ),
               ],
             ),
-            SizedBox(
-              height: 50,
-            )
+            SizedBox(height: 50,)
           ],
         ),
       ),
