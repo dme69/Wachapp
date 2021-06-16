@@ -13,7 +13,7 @@ class _SearchState extends State<Search> {
   Database databaseMethods = new Database();
   TextEditingController searchEditingController = new TextEditingController();
   QuerySnapshot searchResultSnapshot;
-  static String myName = "";
+  static String myName = "bonifacio";
   String chatRoomId;
 
   bool isLoading = false;
@@ -52,7 +52,7 @@ class _SearchState extends State<Search> {
   sendMessage(String userName){
     List<String> users = [myName,userName];
 
-    String chatRoomId = getChatRoomId(myName,userName);
+    chatRoomId = getChatRoomId(myName,userName);
 
     Map<String, dynamic> chatRoom = {
       "users": users,
@@ -96,7 +96,7 @@ class _SearchState extends State<Search> {
           Spacer(),
           GestureDetector(
             onTap: (){
-              //sendMessage(userName);
+              sendMessage(userName);
               Navigator.push(context, MaterialPageRoute(
       builder: (context) => ConversationScreen(
         chatRoomId: chatRoomId,

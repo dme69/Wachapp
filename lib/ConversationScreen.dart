@@ -46,6 +46,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       setState(() {
         messageEditingController.text = "";
       });
+
     }
   }
 
@@ -83,7 +84,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                           decoration: InputDecoration(
                               hintText: "Mensaje ...",
                               hintStyle: TextStyle(
-                                color: Colors.black,
+                                color: Colors.grey,
                                 fontSize: 16,
                               ),
                               border: InputBorder.none
